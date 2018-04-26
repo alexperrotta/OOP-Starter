@@ -11,3 +11,35 @@ Card {point: 1, suit: "spades"}
 > myDeck.numCardsLeft()
 50
 Implement a Deck constructor that will allow for the above code to work. */
+
+function Deck() {
+	this.cards = [];
+
+	var suits = ['h', 'd', 's', 'c'];
+	for (var i=0; i<52; i++) {
+		var currentSuit = suits[Math.floor(i/13)];
+		var currentNumber = i%13 + 1;
+		this.cards.push(new Card(currentSuit, currentNumber));
+	}
+
+	this.shuffleDeck();
+}
+
+Deck.prototype.shuffleDeck = function() {
+	this.cards.sort(function(a, b){
+		return Math.random() - 0.5;
+	});
+}
+
+Deck.prototype.drawCard= function() {
+	return this.cards.pop();
+}
+
+Deck.prototype.numCardsLeft = function() {
+	return this.cards.length;
+}
+
+
+
+
+
